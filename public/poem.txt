@@ -1,0 +1,10 @@
+function love(){
+ var him = true;
+ var her = true;
+
+ return(her == him)
+}
+
+if(love()){
+  death = null;
+}
