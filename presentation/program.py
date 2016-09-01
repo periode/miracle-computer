@@ -1,8 +1,10 @@
 import os
+import math
 import random
 from sys import stdout
 from time import sleep
 from blessings import Terminal
+import decimal
 
 t = Terminal()
 
@@ -98,8 +100,31 @@ def reset_style():
     print('{t.normal}'.format(t=t), end="")
 
 def compute():
-    print("1")
-
+    a = 0
+    b = 0
+    t = 0
+    while t < 100:
+        spell("STORE "+str(decimal.Decimal(a)), 1)
+        sleep(0.5)
+        b = random.randint(0, 256)
+        r = random.random()
+        if r < 0.25:
+            spell("ADD "+str(b), 1)
+            sleep(0.5)
+            a += b
+        elif r < 0.5:
+            spell("SUB "+str(b), 1)
+            sleep(0.5)
+            a -= b
+        elif r < 0.75:
+            spell("MUL "+str(b), 1)
+            sleep(0.5)
+            a *= b
+        else:
+            spell("DIV "+str(b), 1)
+            sleep(0.5)
+            a /= b
+        t += 1
 
 
 ######################################################### START
@@ -114,9 +139,10 @@ while choice != 'q':
         spell("would you like to read the text that gave me birth?", 1)
     elif choice == "sure":
         spell("it was written by ", 0)
-        set_style('red')
-        spell("alan turing", 1)
+        set_style('reverse')
+        spell("alan turing", 0)
         reset_style()
+        print("")
         sleep(3)
         print("")
         while turing_index < len(turing):
@@ -131,6 +157,8 @@ while choice != 'q':
         print("")
         stage += 1
     elif choice == "what can you do?":
+        spell('this is what i can do:', 2)
+        sleep(3)
         compute()
     elif choice == "q":
         reset_style()
