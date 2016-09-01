@@ -56,15 +56,6 @@ def setup_turing():
     ##red 17
     turing.append("I therefore proceed with the development of the theory and assume that it is understood what is meant by \"machine\", \"tape\", \"scanned\", etc.")
 
-
-def title():
-    print('\n')
-    print("##########################")
-    print('serpentine 2016')
-    print("##########################")
-    for x in range(0, 20):
-        print('\n')
-
 def spell(string, line_break):
     i = 0
     while i < len(string):
@@ -75,6 +66,24 @@ def spell(string, line_break):
 
     for x in range (0, line_break):
         print(" ")
+
+def set_style(st):
+    if st == 'reverse':
+        print(t.reverse+'', end="")
+    elif st == 'red':
+        print('{t.red}'.format(t=t), end="")
+
+def reset_style():
+    print('{t.normal}'.format(t=t), end="")
+
+def title():
+    print('\n')
+    spell("##########################",1)
+    spell('serpentine 2016', 1)
+    spell("##########################", 1)
+    for x in range(0, 20):
+        sleep(0.1)
+        print('\n')
 
 def print_error():
     r = random.random()
@@ -90,14 +99,6 @@ def print_error():
     else:
         spell('i\'m sorry?', 1)
 
-def set_style(st):
-    if st == 'reverse':
-        print(t.reverse+'', end="")
-    elif st == 'red':
-        print('{t.red}'.format(t=t), end="")
-
-def reset_style():
-    print('{t.normal}'.format(t=t), end="")
 
 def compute():
     a = 0
