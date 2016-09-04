@@ -6,6 +6,8 @@ from time import sleep
 from blessings import Terminal
 import decimal
 
+import pyttsx
+
 t = Terminal()
 
 choice = ""
