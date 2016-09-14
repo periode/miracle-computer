@@ -83,9 +83,9 @@ my_game = Game(State(glider, x = 9, y = 4, width = 30, height = 30))
 
 i = 0
 
-while True:
-    print("life at step # %i" % i)
-    print(my_game.display())
-    sleep(0.2)
-    my_game.step(i)
-    i += 1
+# while True:
+#     print("life at step # %i" % i)
+#     print(my_game.display())
+#     sleep(0.2)
+#     my_game.step(i)
+#     i += 1
