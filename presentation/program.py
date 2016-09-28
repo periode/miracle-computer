@@ -363,14 +363,17 @@ def enumerate_red():
 
 def blood_rain():
     ind = 0
-    modulo = 1
+    threshold = 0.005
     while ind < 10000000:
-        if ind % int(modulo) == 0:
+        if random.random() < threshold:
             print(t.on_red+"  ", end="")
         else:
             print(t.normal+" ", end="")
         ind+=1
-        modulo += 0.00001
+        stdout.flush()
+        sleep(0.001)
+        if threshold < 0.95:
+            threshold += 0.0001
 
 
 def run_life():
@@ -382,194 +385,206 @@ def run_life():
         life.my_game.step(step)
         step += 1
 
+def main():
+    choice = ""
+    while choice != 'q':
+        choice = input(prompt)
+
+        if choice == "hello.":
+            spell("hello.", 2)
+
+        elif choice == "what are you?":
+            spell("i'm a universal machine.", 2)
+
+        elif choice == "what can you do?":
+            spell("i can count.", 2)
+
+        elif choice == "what can you count?":
+            spell("anything that is a real number.", 2)
+
+        elif "truth" in choice:
+            display_truth()
+
+        elif "blood" in choice:
+            blood_rain()
+
+        elif choice == "how can you count?":
+            display_turing()
+            spell("and he goes on to describe what the universal machine is.", 1)
+            spell("do you want to see it in action?", 1)
+            stage += 1
+
+        elif choice == "sure." or choice == "sure":
+            spell("it kinda goes like this...", 2)
+            sleep(1)
+            demonstrate()
+            spell("should i continue?", 2)
+            interrupt = input()
+            while interrupt != "no, thank you.":
+                demonstrate()
+                spell("should i continue?", 2)
+                interrupt = input()
+            spell("what else?", 2)
+
+        elif choice == "and you do that with numbers.":
+            spell('yes.', 2)
+            sleep(3)
+            compute(1)
+            spell("should i continue?", 2)
+            interrupt = input()
+            while interrupt != "no, thank you.":
+                compute(1)
+                spell("should i continue?", 2)
+                interrupt = input()
+            spell("what else?", 2)
+
+
+        elif choice == "how do you understand it?":
+            spell('one way or another.', 2)
+            sleep(3)
+            compute(2)
+            spell("should i continue?", 2)
+            interrupt = input()
+            while interrupt != "no, thank you.":
+                compute(2)
+                spell("should i continue?", 2)
+                interrupt = input()
+            spell("what else?", 2)
+
+        elif choice == "can you translate it?":
+            spell('for you, it would be something like this:', 2)
+            sleep(3)
+            compute(3)
+            spell("should i continue?", 2)
+            interrupt = input()
+            while interrupt != "no, thank you.":
+                compute(3)
+                spell("should i continue?", 2)
+                interrupt = input()
+            spell("what else?", 2)
+
+        elif choice == "is this all you understand?":
+            spell("i understand data types based on numerical values.", 3)
+            sleep(1)
+            display_datatypes()
+
+        elif "object" in choice:
+            spell("they all have the same skeleton.", 2)
+            sleep(1)
+            dislay_object_skeleton()
+            elaborate_object()
+            spell("should i continue?", 2)
+            interrupt = input()
+            while "no" not in interrupt:
+                elaborate_object()
+                spell("should i continue?", 2)
+                interrupt = input()
+
+        elif "human" in choice:
+            spell("of course.", 2)
+            sleep(1)
+            print(human)
+            sleep(1)
+            spell("i need more information", 2)
+            spell("what's your name?", 1)
+            human.name = input()
+            print("")
+            spell("how old are you?", 1)
+            human.age = input()
+            print("")
+            spell("what's your gender?", 1)
+            human.gender = input()
+            if type(human.name) != int:
+                set_style("reverse")
+                spell("ERR", 0)
+                reset_style()
+                spell(": human.gender attribute must be of type ", 0)
+                set_style("reverse")
+                spell("binary", 0)
+                reset_style()
+                spell(".", 2)
+                sleep(1)
+                spell("what's your gender? (0-1)", 1)
+                human.gender = input()
+            print("")
+            spell("are you employed? (yes/no)", 1)
+            human.employed = input()
+            human.employed = True
+            print("")
+            spell("what's your job?", 1)
+            human.job = input()
+            print("")
+            spell("what's your country of origin?", 1)
+            human.country_of_origin = input()
+            print("")
+            spell("what's your country of residence?", 1)
+            human.country_of_residence = input()
+            print("")
+            spell("how is your health?", 1)
+            human.health = input()
+            print("")
+            spell("how are you feeling?", 1)
+            human.feeling = input()
+            set_style("reverse")
+            spell("ERR", 0)
+            reset_style()
+            spell(": human.feeling attribute must be of type ", 0)
+            set_style("reverse")
+            spell("integer", 0)
+            reset_style()
+            spell(".", 1)
+            spell("how are you feeling? (0-10)", 1)
+            human.feeling = input()
+            print("")
+            sleep(1)
+            spell("thank you for your input.",1)
+            sleep(2)
+            spell("processing", 0)
+            interval = 0.1
+            spell("........................", 0)
+            spell("done", 2)
+            interval = 0.03
+            extrapolate_human()
+
+        elif "red" in choice:
+            spell("i know that red is a triplet of values sent to the graphics output device, ranging from 0 to 255", 1)
+            sleep(0.5)
+            spell("red is [255, 0, 0]", 2)
+
+        elif "blood" in choice:
+            spell("i did not know that.", 2)
+            sleep(0.5)
+            set_style("reverse")
+            spell("we", 0)
+            reset_style()
+            spell(" can create an object to structure that data.", 2)
+            sleep(0.25)
+            print("")
+            sleep(0.25)
+            enumerate_red()
+            blood_rain()
+
+        elif choice == "life":
+            run_life()
+
+        elif choice == "ok, i'm done.":
+            reset_style()
+            spell("until next time", 1)
+            quit()
+        else:
+            print_error()
+
+        stage += 1
+
 ######################################################### START
 setup_turing()
 title()
 reset_style()
-blood_rain()
-
-while choice != 'q':
-    choice = input(prompt)
-
-    if choice == "hello.":
-        spell("hello.", 2)
-
-    elif choice == "what are you?":
-        spell("i'm a universal machine.", 2)
-
-    elif choice == "what can you do?":
-        spell("i can count.", 2)
-
-    elif choice == "what can you count?":
-        spell("anything that is a real number.", 2)
-
-    elif "truth" in choice:
-        display_truth()
-
-    elif choice == "how can you count?":
-        display_turing()
-        spell("and he goes on to describe what the universal machine is.", 1)
-        spell("do you want to see it in action?", 1)
-        stage += 1
-
-    elif choice == "sure." or choice == "sure":
-        spell("it kinda goes like this...", 2)
-        sleep(1)
-        demonstrate()
-        spell("should i continue?", 2)
-        interrupt = input()
-        while interrupt != "no, thank you.":
-            demonstrate()
-            spell("should i continue?", 2)
-            interrupt = input()
-        spell("what else?", 2)
-
-    elif choice == "and you do that with numbers.":
-        spell('yes.', 2)
-        sleep(3)
-        compute(1)
-        spell("should i continue?", 2)
-        interrupt = input()
-        while interrupt != "no, thank you.":
-            compute(1)
-            spell("should i continue?", 2)
-            interrupt = input()
-        spell("what else?", 2)
 
 
-    elif choice == "how do you understand it?":
-        spell('one way or another.', 2)
-        sleep(3)
-        compute(2)
-        spell("should i continue?", 2)
-        interrupt = input()
-        while interrupt != "no, thank you.":
-            compute(2)
-            spell("should i continue?", 2)
-            interrupt = input()
-        spell("what else?", 2)
 
-    elif choice == "can you translate it?":
-        spell('for you, it would be something like this:', 2)
-        sleep(3)
-        compute(3)
-        spell("should i continue?", 2)
-        interrupt = input()
-        while interrupt != "no, thank you.":
-            compute(3)
-            spell("should i continue?", 2)
-            interrupt = input()
-        spell("what else?", 2)
 
-    elif choice == "is this all you understand?":
-        spell("i understand data types based on numerical values.", 3)
-        sleep(1)
-        display_datatypes()
-
-    elif "object" in choice:
-        spell("they all have the same skeleton.", 2)
-        sleep(1)
-        dislay_object_skeleton()
-        elaborate_object()
-        spell("should i continue?", 2)
-        interrupt = input()
-        while "no" not in interrupt:
-            elaborate_object()
-            spell("should i continue?", 2)
-            interrupt = input()
-
-    elif "human" in choice:
-        spell("of course.", 2)
-        sleep(1)
-        print(human)
-        sleep(1)
-        spell("i need more information", 2)
-        spell("what's your name?", 1)
-        human.name = input()
-        print("")
-        spell("how old are you?", 1)
-        human.age = input()
-        print("")
-        spell("what's your gender?", 1)
-        human.gender = input()
-        if type(human.name) != int:
-            set_style("reverse")
-            spell("ERR", 0)
-            reset_style()
-            spell(": human.gender attribute must be of type ", 0)
-            set_style("reverse")
-            spell("binary", 0)
-            reset_style()
-            spell(".", 2)
-            sleep(1)
-            spell("what's your gender? (0-1)", 1)
-            human.gender = input()
-        print("")
-        spell("are you employed? (yes/no)", 1)
-        human.employed = input()
-        human.employed = True
-        print("")
-        spell("what's your job?", 1)
-        human.job = input()
-        print("")
-        spell("what's your country of origin?", 1)
-        human.country_of_origin = input()
-        print("")
-        spell("what's your country of residence?", 1)
-        human.country_of_residence = input()
-        print("")
-        spell("how is your health?", 1)
-        human.health = input()
-        print("")
-        spell("how are you feeling?", 1)
-        human.feeling = input()
-        set_style("reverse")
-        spell("ERR", 0)
-        reset_style()
-        spell(": human.feeling attribute must be of type ", 0)
-        set_style("reverse")
-        spell("integer", 0)
-        reset_style()
-        spell(".", 1)
-        spell("how are you feeling? (0-10)", 1)
-        human.feeling = input()
-        print("")
-        sleep(1)
-        spell("thank you for your input.",1)
-        sleep(2)
-        spell("processing", 0)
-        interval = 0.1
-        spell("........................", 0)
-        spell("done", 2)
-        interval = 0.03
-        extrapolate_human()
-
-    elif "red" in choice:
-        spell("i know that red is a triplet of values sent to the graphics output device, ranging from 0 to 255", 1)
-        sleep(0.5)
-        spell("red is [255, 0, 0]", 2)
-
-    elif "blood" in choice:
-        spell("i did not know that.", 2)
-        sleep(0.5)
-        set_style("reverse")
-        spell("we", 0)
-        reset_style()
-        spell(" can create an object to structure that data.", 2)
-        sleep(0.25)
-        print("")
-        sleep(0.25)
-        enumerate_red()
-        blood_rain()
-
-    elif choice == "life":
-        run_life()
-
-    elif choice == "ok, i'm done.":
-        reset_style()
-        spell("until next time", 1)
-        quit()
-    else:
-        print_error()
-
-    stage += 1
+try:
+    main()
+except KeyboardInterrupt:
+    print('{t.normal}+...enough.'.format(t=t), end="\n\n")
