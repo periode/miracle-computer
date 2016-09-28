@@ -7,7 +7,6 @@ from blessings import Terminal
 import decimal
 import string
 
-
 #user files
 import life
 import eliza
@@ -21,8 +20,6 @@ t = Terminal()
 
 choice = ""
 prompt = ""
-stage = 0
-interval = 0.03
 
 human = h.Human()
 red = c.Color()
@@ -83,20 +80,20 @@ def reset_style():
 
 def title():
     print('\n')
-    spell("##########################",1)
-    spell('serpentine 2016', 1)
-    spell("##########################", 1)
+    type.spell("##########################",1)
+    type.spell('serpentine 2016', 1)
+    type.spell("##########################", 1)
     for x in range(0, 10):
         sleep(0.1)
         print('\n')
 
 
 def display_turing():
-    spell("it started with a text.", 1)
+    type.spell("it started with a text.", 1)
     print("")
-    spell("it was written by ", 0)
+    type.spell("it was written by ", 0)
     set_style('reverse')
-    spell("alan turing", 0)
+    type.spell("alan turing", 0)
     reset_style()
     print("")
     sleep(3)
@@ -111,7 +108,7 @@ def display_turing():
             set_style('reverse')
         else:
             reset_style()
-        spell(turing[turing_index], 0)
+        type.spell(turing[turing_index], 0)
         reset_style()
         turing_index += 1
     print("")
@@ -121,24 +118,24 @@ def print_error():
     r = random.random()
 
     if r < 0.2:
-        spell('excuse me?', 1)
+        type.spell('excuse me?', 1)
     elif r < 0.4:
-        spell('i didn\'t quite understand.', 1)
+        type.spell('i didn\'t quite understand.', 1)
     elif r < 0.6:
-        spell('can you say that again?', 1)
+        type.spell('can you say that again?', 1)
     elif r < 0.8:
-        spell('what did you say?', 1)
+        type.spell('what did you say?', 1)
     else:
-        spell('i\'m sorry?', 1)
+        type.spell('i\'m sorry?', 1)
 
 def display_truth():
-    spell("the truth functions are as follow:", 3)
+    type.spell("the truth functions are as follow:", 3)
     index = 0
     for index in range(0, len(truth_symbols)):
         set_style("reverse")
-        spell(" "+truth_symbols[index], 1)
+        type.spell(" "+truth_symbols[index], 1)
         reset_style()
-        spell(truth_legends[index], 3)
+        type.spell(truth_legends[index], 3)
         sleep(1)
         index += 1
     print("")
@@ -146,9 +143,9 @@ def display_truth():
 def demonstrate():
     t = 0
     while t < 10:
-        spell("READ", 1)
-        spell("PROCESS", 1)
-        spell("WRITE", 1)
+        type.spell("READ", 1)
+        type.spell("PROCESS", 1)
+        type.spell("WRITE", 1)
         t += 1
 
 def compute(complexity_level):
@@ -185,109 +182,109 @@ def compute(complexity_level):
     b = 0
     t = 0
     while t < 10:
-        spell(read+str(decimal.Decimal(a)), 1)
+        type.spell(read+str(decimal.Decimal(a)), 1)
         sleep(0.5)
         b = random.randint(0, 256)
         r = random.random()
         if r < 0.25:
             if(complexity_level == 2):
-                spell(add+str(bin(b)[2:]), 1)
+                type.spell(add+str(bin(b)[2:]), 1)
             else:
-                spell(add+str(b), 1)
+                type.spell(add+str(b), 1)
             sleep(0.5)
             a += b
         elif r < 0.5:
             if(complexity_level == 2):
-                spell(sub+str(bin(b)[2:]), 1)
+                type.spell(sub+str(bin(b)[2:]), 1)
             else:
-                spell(sub+str(b), 1)
+                type.spell(sub+str(b), 1)
             sleep(0.5)
             a -= b
         elif r < 0.75:
             if(complexity_level == 2):
-                spell(mult+str(bin(b)[2:]), 1)
+                type.spell(mult+str(bin(b)[2:]), 1)
             else:
-                spell(mult+str(b), 1)
+                type.spell(mult+str(b), 1)
             sleep(0.5)
             a *= b
         else:
             if(complexity_level == 2):
-                spell(div+str(bin(b)[2:]), 1)
+                type.spell(div+str(bin(b)[2:]), 1)
             else:
-                spell(div+str(b), 1)
+                type.spell(div+str(b), 1)
             sleep(0.5)
             a /= b
         t += 1
-        spell(write+str(decimal.Decimal(a)), 1)
+        type.spell(write+str(decimal.Decimal(a)), 1)
 
 def display_datatypes():
-    spell("a ", 0)
+    type.spell("a ", 0)
     set_style("reverse")
-    spell("boolean", 0)
+    type.spell("boolean", 0)
     reset_style()
-    spell(" is a datatype which represents the value true or false.", 2)
+    type.spell(" is a datatype which represents the value true or false.", 2)
 
     sleep(1)
 
-    spell("a ", 0)
+    type.spell("a ", 0)
     set_style("reverse")
-    spell("floating point", 0)
+    type.spell("floating point", 0)
     reset_style()
-    spell(" is a datatype which represents rational numbers.", 2)
+    type.spell(" is a datatype which represents rational numbers.", 2)
 
     sleep(1)
 
-    spell("a ", 0)
+    type.spell("a ", 0)
     set_style("reverse")
-    spell("integer", 0)
+    type.spell("integer", 0)
     reset_style()
-    spell(" is a datatype which represents whole numbers.", 2)
+    type.spell(" is a datatype which represents whole numbers.", 2)
 
     sleep(1)
 
-    spell("a ", 0)
+    type.spell("a ", 0)
     set_style("reverse")
-    spell("fixed point", 0)
+    type.spell("fixed point", 0)
     reset_style()
-    spell(" is a datatype which represents a monetary value.", 2)
+    type.spell(" is a datatype which represents a monetary value.", 2)
 
     sleep(1)
 
-    spell("an ", 0)
+    type.spell("an ", 0)
     set_style("reverse")
-    spell("array", 0)
+    type.spell("array", 0)
     reset_style()
-    spell(" is a datatype which stores a number of elements of the same type in a specific order.", 2)
+    type.spell(" is a datatype which stores a number of elements of the same type in a specific order.", 2)
 
     sleep(1)
 
-    spell("an ", 0)
+    type.spell("an ", 0)
     set_style("reverse")
-    spell("object", 0)
+    type.spell("object", 0)
     reset_style()
-    spell(" is a datatype which contains a number of data fields, as well as a number of subroutines for accessing or modifying them, called methods.", 2)
+    type.spell(" is a datatype which contains a number of data fields, as well as a number of subroutines for accessing or modifying them, called methods.", 2)
 
     sleep(1)
 
-    spell("an ", 0)
+    type.spell("an ", 0)
     set_style("reverse")
-    spell("object", 0)
+    type.spell("object", 0)
     reset_style()
-    spell(" is a datatype which can be ", 0)
+    type.spell(" is a datatype which can be ", 0)
     set_style("reverse")
-    spell("anything", 0)
+    type.spell("anything", 0)
     reset_style()
-    spell(".", 2)
+    type.spell(".", 2)
 
 def dislay_object_skeleton():
-    spell("Object(){", 1)
-    spell("\t be_something = ''", 1)
-    spell("\t store_something = 0", 1)
-    spell("\t do_something(arg){", 1)
-    spell("\t\t ...", 1)
-    spell("\t }", 1)
-    spell("}", 2)
-    spell("let o = new Object()", 3)
+    type.spell("Object(){", 1)
+    type.spell("\t be_something = ''", 1)
+    type.spell("\t store_something = 0", 1)
+    type.spell("\t do_something(arg){", 1)
+    type.spell("\t\t ...", 1)
+    type.spell("\t }", 1)
+    type.spell("}", 2)
+    type.spell("let o = new Object()", 3)
 
 def generate_string():
     output = ''
@@ -318,24 +315,24 @@ def elaborate_object():
 
         if r < 0.33:
             set_style("reverse")
-            spell("be", 0)
+            type.spell("be", 0)
             reset_style()
-            spell("_something = '"+new_string+"'", 2)
+            type.spell("_something = '"+new_string+"'", 2)
         elif r < 0.66:
             set_style("reverse")
-            spell("store", 0)
+            type.spell("store", 0)
             reset_style()
-            spell("_something = "+new_int+"", 2)
+            type.spell("_something = "+new_int+"", 2)
         else:
             set_style("reverse")
-            spell("do", 0)
+            type.spell("do", 0)
             reset_style()
-            spell("_something(else)", 2)
+            type.spell("_something(else)", 2)
 
         index += 1
 
 def extrapolate_human():
-    spell(str(human), 2)
+    type.spell(str(human), 2)
     sleep(1)
     property_names = vars(human)
     for key in property_names:
@@ -343,10 +340,10 @@ def extrapolate_human():
 
     print("")
     sleep(3)
-    spell("this is what consitutes a human", 1)
+    type.spell("this is what consitutes a human", 1)
 
 def enumerate_red():
-    spell(str(red), 2)
+    type.spell(str(red), 2)
     sleep(1)
     property_names = vars(red)
     for key in property_names:
@@ -382,16 +379,16 @@ def main():
         choice = input(prompt)
 
         if choice == "hello.":
-            spell("hello.", 2)
+            type.spell("hello.", 2)
 
         elif choice == "what are you?":
-            spell("i'm a universal machine.", 2)
+            type.spell("i'm a universal machine.", 2)
 
         elif choice == "what can you do?":
-            spell("i can count.", 2)
+            type.spell("i can count.", 2)
 
         elif choice == "what can you count?":
-            spell("anything that is a real number.", 2)
+            type.spell("anything that is a real number.", 2)
 
         elif "truth" in choice:
             display_truth()
@@ -401,154 +398,153 @@ def main():
 
         elif choice == "how can you count?":
             display_turing()
-            spell("and he goes on to describe what the universal machine is.", 1)
-            spell("do you want to see it in action?", 1)
-            stage += 1
+            type.spell("and he goes on to describe what the universal machine is.", 1)
+            type.spell("do you want to see it in action?", 1)
 
         elif choice == "sure." or choice == "sure":
-            spell("it kinda goes like this...", 2)
+            type.spell("it kinda goes like this...", 2)
             sleep(1)
             demonstrate()
-            spell("should i continue?", 2)
+            type.spell("should i continue?", 2)
             interrupt = input()
             while interrupt != "no, thank you.":
                 demonstrate()
-                spell("should i continue?", 2)
+                type.spell("should i continue?", 2)
                 interrupt = input()
-            spell("what else?", 2)
+            type.spell("what else?", 2)
 
         elif choice == "and you do that with numbers.":
-            spell('yes.', 2)
+            type.spell('yes.', 2)
             sleep(3)
             compute(1)
-            spell("should i continue?", 2)
+            type.spell("should i continue?", 2)
             interrupt = input()
             while interrupt != "no, thank you.":
                 compute(1)
-                spell("should i continue?", 2)
+                type.spell("should i continue?", 2)
                 interrupt = input()
-            spell("what else?", 2)
+            type.spell("what else?", 2)
 
 
         elif choice == "how do you understand it?":
-            spell('one way or another.', 2)
+            type.spell('one way or another.', 2)
             sleep(3)
             compute(2)
-            spell("should i continue?", 2)
+            type.spell("should i continue?", 2)
             interrupt = input()
             while interrupt != "no, thank you.":
                 compute(2)
-                spell("should i continue?", 2)
+                type.spell("should i continue?", 2)
                 interrupt = input()
-            spell("what else?", 2)
+            type.spell("what else?", 2)
 
         elif choice == "can you translate it?":
-            spell('for you, it would be something like this:', 2)
+            type.spell('for you, it would be something like this:', 2)
             sleep(3)
             compute(3)
-            spell("should i continue?", 2)
+            type.spell("should i continue?", 2)
             interrupt = input()
             while interrupt != "no, thank you.":
                 compute(3)
-                spell("should i continue?", 2)
+                type.spell("should i continue?", 2)
                 interrupt = input()
-            spell("what else?", 2)
+            type.spell("what else?", 2)
 
         elif choice == "is this all you understand?":
-            spell("i understand data types based on numerical values.", 3)
+            type.spell("i understand data types based on numerical values.", 3)
             sleep(1)
             display_datatypes()
 
         elif "object" in choice:
-            spell("they all have the same skeleton.", 2)
+            type.spell("they all have the same skeleton.", 2)
             sleep(1)
             dislay_object_skeleton()
             elaborate_object()
-            spell("should i continue?", 2)
+            type.spell("should i continue?", 2)
             interrupt = input()
             while "no" not in interrupt:
                 elaborate_object()
-                spell("should i continue?", 2)
+                type.spell("should i continue?", 2)
                 interrupt = input()
 
         elif "human" in choice:
-            spell("of course.", 2)
+            type.spell("of course.", 2)
             sleep(1)
             print(human)
             sleep(1)
-            spell("i need more information", 2)
-            spell("what's your name?", 1)
+            type.spell("i need more information", 2)
+            type.spell("what's your name?", 1)
             human.name = input()
             print("")
-            spell("how old are you?", 1)
+            type.spell("how old are you?", 1)
             human.age = input()
             print("")
-            spell("what's your gender?", 1)
+            type.spell("what's your gender?", 1)
             human.gender = input()
             if type(human.name) != int:
                 set_style("reverse")
-                spell("ERR", 0)
+                type.spell("ERR", 0)
                 reset_style()
-                spell(": human.gender attribute must be of type ", 0)
+                type.spell(": human.gender attribute must be of type ", 0)
                 set_style("reverse")
-                spell("binary", 0)
+                type.spell("binary", 0)
                 reset_style()
-                spell(".", 2)
+                type.spell(".", 2)
                 sleep(1)
-                spell("what's your gender? (0-1)", 1)
+                type.spell("what's your gender? (0-1)", 1)
                 human.gender = input()
             print("")
-            spell("are you employed? (yes/no)", 1)
+            type.spell("are you employed? (yes/no)", 1)
             human.employed = input()
             human.employed = True
             print("")
-            spell("what's your job?", 1)
+            type.spell("what's your job?", 1)
             human.job = input()
             print("")
-            spell("what's your country of origin?", 1)
+            type.spell("what's your country of origin?", 1)
             human.country_of_origin = input()
             print("")
-            spell("what's your country of residence?", 1)
+            type.spell("what's your country of residence?", 1)
             human.country_of_residence = input()
             print("")
-            spell("how is your health?", 1)
+            type.spell("how is your health?", 1)
             human.health = input()
             print("")
-            spell("how are you feeling?", 1)
+            type.spell("how are you feeling?", 1)
             human.feeling = input()
             set_style("reverse")
-            spell("ERR", 0)
+            type.spell("ERR", 0)
             reset_style()
-            spell(": human.feeling attribute must be of type ", 0)
+            type.spell(": human.feeling attribute must be of type ", 0)
             set_style("reverse")
-            spell("integer", 0)
+            type.spell("integer", 0)
             reset_style()
-            spell(".", 1)
-            spell("how are you feeling? (0-10)", 1)
+            type.spell(".", 1)
+            type.spell("how are you feeling? (0-10)", 1)
             human.feeling = input()
             print("")
             sleep(1)
-            spell("thank you for your input.",1)
+            type.spell("thank you for your input.",1)
             sleep(2)
-            spell("processing", 0)
+            type.spell("processing", 0)
             interval = 0.1
-            spell("........................", 0)
-            spell("done", 2)
+            type.spell("........................", 0)
+            type.spell("done", 2)
             interval = 0.03
             extrapolate_human()
 
         elif "red" in choice:
-            spell("i know that red is a triplet of values sent to the graphics output device, ranging from 0 to 255", 1)
+            type.spell("i know that red is a triplet of values sent to the graphics output device, ranging from 0 to 255", 1)
             sleep(0.5)
-            spell("red is [255, 0, 0]", 2)
+            type.spell("red is [255, 0, 0]", 2)
 
         elif "blood" in choice:
-            spell("i did not know that.", 2)
+            type.spell("i did not know that.", 2)
             sleep(0.5)
             set_style("reverse")
-            spell("we", 0)
+            type.spell("we", 0)
             reset_style()
-            spell(" can create an object to structure that data.", 2)
+            type.spell(" can create an object to structure that data.", 2)
             sleep(0.25)
             print("")
             sleep(0.25)
@@ -556,19 +552,34 @@ def main():
             blood_rain()
 
         elif "eliza" in choice:
+            type.spell('this is ELIZA', 0)
+            sleep(0.1)
+            print('\n')
+            sleep(0.1)
+            print('\n')
+            sleep(0.1)
+            print('\n')
+            set_style('reverse')
             eliza.converse()
+            reset_style()
+            sleep(0.1)
+            print('\n')
+            sleep(0.1)
+            print('\n')
+            sleep(0.1)
+            print('\n')
+            type.spell('that was ELIZA',0)
 
         elif choice == "life":
             run_life()
 
         elif choice == "ok, i'm done.":
             reset_style()
-            spell("until next time", 1)
+            type.spell("until next time", 1)
             quit()
         else:
             print_error()
 
-        stage += 1
 
 ######################################################### START
 setup_turing()

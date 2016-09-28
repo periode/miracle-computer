@@ -243,9 +243,18 @@ def analyze(answer):
             return response.format(*[reflect(g) for g in match.groups()])
 
 def converse():
-    spell("hello, how are you feeling today?", 3)
+    conversing = True
 
-    while True:
-        print("\n")
-        answer = input()
-        spell (analyze(answer.lower()), 3)
+    type.spell("hello, how are you feeling today?", 2)
+
+    eliza_1 = "i'm feeling pretty sad."
+    eliza_2 = ""
+
+    while conversing:
+        # answer = input()
+        eliza_2 = analyze(eliza_1.lower())
+        type.spell(eliza_2, 2)
+        eliza_1 = analyze(eliza_2.lower())
+        type.spell(eliza_1, 2)
+        if 'enough' in eliza_1.lower():
+            conversing = False
