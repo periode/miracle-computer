@@ -10,6 +10,8 @@ import string
 
 #user files
 import life
+import eliza
+import type
 import human as h
 import color as c
 
@@ -68,17 +70,6 @@ def setup_turing():
     ##red 17
     turing.append("I therefore proceed with the development of the theory and assume that it is understood what is meant by \"machine\", \"tape\", \"scanned\", etc.")
 
-def spell(string, line_break):
-    index = 0
-
-    while index < len(string):
-        stdout.write(string[index])
-        stdout.flush()
-        sleep(interval)
-        index += 1
-
-    for x in range (0, line_break):
-        print(" ")
 
 def set_style(st):
     if st == 'reverse':
@@ -564,6 +555,9 @@ def main():
             enumerate_red()
             blood_rain()
 
+        elif "eliza" in choice:
+            eliza.converse()
+
         elif choice == "life":
             run_life()
 
@@ -587,4 +581,5 @@ reset_style()
 try:
     main()
 except KeyboardInterrupt:
-    print('{t.normal}+...enough.'.format(t=t), end="\n\n")
+    reset_style()
+    print('...enough.', end="\n\n")

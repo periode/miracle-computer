@@ -1,6 +1,8 @@
 import random
 import re
 
+import type
+
 reflections = {
     "am": "are",
     "was": "were",
@@ -19,55 +21,55 @@ reflections = {
 }
 
 psychobabble = [
-    [r'I need (.*)',
+    [r'i need (.*)',
      ["Why do you need {0}?",
       "Would it really help you to get {0}?",
       "Are you sure you need {0}?"]],
 
-    [r'Why don\'?t you ([^\?]*)\??',
+    [r'why don\'?t you ([^\?]*)\??',
      ["Do you really think I don't {0}?",
       "Perhaps eventually I will {0}.",
       "Do you really want me to {0}?"]],
 
-    [r'Why can\'?t I ([^\?]*)\??',
+    [r'why can\'?t I ([^\?]*)\??',
      ["Do you think you should be able to {0}?",
       "If you could {0}, what would you do?",
       "I don't know -- why can't you {0}?",
       "Have you really tried?"]],
 
-    [r'I can\'?t (.*)',
+    [r'i can\'?t (.*)',
      ["How do you know you can't {0}?",
       "Perhaps you could {0} if you tried.",
       "What would it take for you to {0}?"]],
 
-    [r'I am (.*)',
+    [r'i am (.*)',
      ["Did you come to me because you are {0}?",
       "How long have you been {0}?",
       "How do you feel about being {0}?"]],
 
-    [r'I\'?m (.*)',
+    [r'i\'?m (.*)',
      ["How does being {0} make you feel?",
       "Do you enjoy being {0}?",
       "Why do you tell me you're {0}?",
       "Why do you think you're {0}?"]],
 
-    [r'Are you ([^\?]*)\??',
+    [r'are you ([^\?]*)\??',
      ["Why does it matter whether I am {0}?",
       "Would you prefer it if I were not {0}?",
       "Perhaps you believe I am {0}.",
       "I may be {0} -- what do you think?"]],
 
-    [r'What (.*)',
+    [r'what (.*)',
      ["Why do you ask?",
       "How would an answer to that help you?",
       "What do you think?"]],
 
-    [r'How (.*)',
+    [r'how (.*)',
      ["How do you suppose?",
       "Perhaps you can answer your own question.",
       "What is it you're really asking?"]],
 
-    [r'Because (.*)',
+    [r'because (.*)',
      ["Is that the real reason?",
       "What other reasons come to mind?",
       "Does that reason apply to anything else?",
@@ -77,12 +79,12 @@ psychobabble = [
      ["There are many times when no apology is needed.",
       "What feelings do you have when you apologize?"]],
 
-    [r'Hello(.*)',
+    [r'hello(.*)',
      ["Hello... I'm glad you could drop by today.",
       "Hi there... how are you today?",
       "Hello, how are you feeling today?"]],
 
-    [r'I think (.*)',
+    [r'i think (.*)',
      ["Do you doubt {0}?",
       "Do you really think so?",
       "But you're not sure {0}?"]],
@@ -92,7 +94,7 @@ psychobabble = [
       "When you think of a friend, what comes to mind?",
       "Why don't you tell me about a childhood friend?"]],
 
-    [r'Yes',
+    [r'yes',
      ["You seem quite sure.",
       "OK, but can you elaborate a bit?"]],
 
@@ -102,78 +104,78 @@ psychobabble = [
       "How do computers make you feel?",
       "Do you feel threatened by computers?"]],
 
-    [r'Is it (.*)',
+    [r'is it (.*)',
      ["Do you think it is {0}?",
       "Perhaps it's {0} -- what do you think?",
       "If it were {0}, what would you do?",
       "It could well be that {0}."]],
 
-    [r'It is (.*)',
+    [r'it is (.*)',
      ["You seem very certain.",
       "If I told you that it probably isn't {0}, what would you feel?"]],
 
-    [r'Can you ([^\?]*)\??',
+    [r'can you ([^\?]*)\??',
      ["What makes you think I can't {0}?",
       "If I could {0}, then what?",
       "Why do you ask if I can {0}?"]],
 
-    [r'Can I ([^\?]*)\??',
+    [r'can I ([^\?]*)\??',
      ["Perhaps you don't want to {0}.",
       "Do you want to be able to {0}?",
       "If you could {0}, would you?"]],
 
-    [r'You are (.*)',
+    [r'you are (.*)',
      ["Why do you think I am {0}?",
       "Does it please you to think that I'm {0}?",
       "Perhaps you would like me to be {0}.",
       "Perhaps you're really talking about yourself?"]],
 
-    [r'You\'?re (.*)',
+    [r'you\'?re (.*)',
      ["Why do you say I am {0}?",
       "Why do you think I am {0}?",
       "Are we talking about you, or me?"]],
 
-    [r'I don\'?t (.*)',
+    [r'i don\'?t (.*)',
      ["Don't you really {0}?",
       "Why don't you {0}?",
       "Do you want to {0}?"]],
 
-    [r'I feel (.*)',
+    [r'i feel (.*)',
      ["Good, tell me more about these feelings.",
       "Do you often feel {0}?",
       "When do you usually feel {0}?",
       "When you feel {0}, what do you do?"]],
 
-    [r'I have (.*)',
+    [r'i have (.*)',
      ["Why do you tell me that you've {0}?",
       "Have you really {0}?",
       "Now that you have {0}, what will you do next?"]],
 
-    [r'I would (.*)',
+    [r'i would (.*)',
      ["Could you explain why you would {0}?",
       "Why would you {0}?",
       "Who else knows that you would {0}?"]],
 
-    [r'Is there (.*)',
+    [r'is there (.*)',
      ["Do you think there is {0}?",
       "It's likely that there is {0}.",
       "Would you like there to be {0}?"]],
 
-    [r'My (.*)',
+    [r'my (.*)',
      ["I see, your {0}.",
       "Why do you say that your {0}?",
       "When your {0}, how do you feel?"]],
 
-    [r'You (.*)',
+    [r'you (.*)',
      ["We should be discussing you, not me.",
       "Why do you say that about me?",
       "Why do you care whether I {0}?"]],
 
-    [r'Why (.*)',
+    [r'why (.*)',
      ["Why don't you tell me the reason why {0}?",
       "Why do you think {0}?"]],
 
-    [r'I want (.*)',
+    [r'i want (.*)',
      ["What would it mean to you if you got {0}?",
       "Why do you want {0}?",
       "What would you do if you got {0}?",
@@ -206,7 +208,7 @@ psychobabble = [
       "Perhaps the answer lies within yourself?",
       "Why don't you tell me?"]],
 
-    [r'quit',
+    [r'enough',
      ["Thank you for talking with me.",
       "Good-bye.",
       "Thank you, that will be $150.  Have a good day!"]],
@@ -241,12 +243,9 @@ def analyze(answer):
             return response.format(*[reflect(g) for g in match.groups()])
 
 def converse():
-    print("hello, how are you feeling today?")
+    spell("hello, how are you feeling today?", 3)
 
     while True:
         print("\n")
         answer = input()
-        print (analyze(answer))
-
-
-converse()
+        spell (analyze(answer.lower()), 3)
