@@ -1,7 +1,12 @@
 import random
 import re
 
+from time import sleep
+from blessings import Terminal
+
 import type
+
+t = Terminal()
 
 reflections = {
     "am": "are",
@@ -215,15 +220,16 @@ psychobabble = [
 
     [r'(.*)',
      ["Please tell me more.",
-      "Let's change focus a bit... Tell me about your family.",
+      "Let's change focus a bit... Tell me about computers.",
       "Can you elaborate on that?",
       "Why do you say that {0}?",
       "I see.",
       "Very interesting.",
       "{0}.",
       "I see.  And what does that tell you?",
-      "How does that make you feel?",
-      "How do you feel when you say that?"]]
+      "How does that make you feel, as a computer?",
+      "How do you feel when you say that?",
+      "Can you even feel anything?"]]
 ]
 
 def reflect(fragment):
@@ -245,16 +251,25 @@ def analyze(answer):
 def converse():
     conversing = True
 
-    type.spell("hello, how are you feeling today?", 2)
+    # type.spell("hello, how are you feeling today?", 2)
 
-    eliza_1 = "i'm feeling pretty sad."
-    eliza_2 = ""
+    eliza_1 = "hello... how are you feeling today?"
+    eliza_2 = "i'm feeling very despondent."
 
-    while conversing:
+    lines = 0
+    while lines < 100:
         # answer = input()
-        eliza_2 = analyze(eliza_1.lower())
-        type.spell(eliza_2, 2)
+        print(t.normal+'\n', end="")
+        print(t.black_on_white+'- ', end="")
+        type.spell(eliza_1.lower(), 0)
+        print(t.normal+'\n', end="")
         eliza_1 = analyze(eliza_2.lower())
-        type.spell(eliza_1, 2)
-        if 'enough' in eliza_1.lower():
-            conversing = False
+
+        sleep(0.2)
+
+        print(t.white_on_black+'- ', end="")
+        type.spell(eliza_2.lower(), 0)
+
+        eliza_2 = analyze(eliza_1.lower())
+
+        lines += 1

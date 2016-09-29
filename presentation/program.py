@@ -80,9 +80,13 @@ def reset_style():
 
 def title():
     print('\n')
-    type.spell("##########################",1)
-    type.spell('serpentine 2016', 1)
-    type.spell("##########################", 1)
+    type.spell("################",1)
+    sleep(0.1)
+    type.set_interval(0.2)
+    type.spell('machine language', 1)
+    type.set_interval(0.03)
+    sleep(0.1)
+    type.spell("################", 1)
     for x in range(0, 10):
         sleep(0.1)
         print('\n')
@@ -140,7 +144,7 @@ def display_truth():
         index += 1
     print("")
 
-def demonstrate():
+def read_process_write():
     t = 0
     while t < 10:
         type.spell("READ", 1)
@@ -336,11 +340,11 @@ def extrapolate_human():
     sleep(1)
     property_names = vars(human)
     for key in property_names:
-        print("%s: %s" % (key, property_names[key]))
+        type.spell("%s: %s" % (key, property_names[key]), 2)
+        sleep(0.5)
 
-    print("")
+    print("--")
     sleep(3)
-    type.spell("this is what consitutes a human", 1)
 
 def enumerate_red():
     type.spell(str(red), 2)
@@ -352,7 +356,7 @@ def enumerate_red():
 def blood_rain():
     ind = 0
     threshold = 0.005
-    while ind < 10000000:
+    while threshold < 1.3:
         if random.random() < threshold:
             print(t.on_red+"  ", end="")
         else:
@@ -360,16 +364,23 @@ def blood_rain():
         ind+=1
         stdout.flush()
         sleep(0.001)
-        if threshold < 0.95:
-            threshold += 0.0001
+        threshold += 0.0001
 
 
 def run_life():
     step = 0
-    while step < 40:
-        print("life at step # %i" % step)
-        print(life.my_game.display())
-        sleep(0.2)
+    while step < 101:
+        # os.system('clear')
+        print("\n", end="")
+        print(t.normal+"   life and death at step # %i" % step)
+        for char in life.my_game.display():
+            if char == '1':
+                print(t.normal+char.format(t=t), end="")
+            else:
+                print(t.red+char.format(t=t), end="")
+        # print(life.my_game.display())
+        sleep(0.5)
+
         life.my_game.step(step)
         step += 1
 
@@ -393,22 +404,22 @@ def main():
         elif "truth" in choice:
             display_truth()
 
-        elif "blood" in choice:
+        elif "blood2" in choice:
             blood_rain()
 
-        elif choice == "how can you count?":
+        elif "turing" in choice:
             display_turing()
             type.spell("and he goes on to describe what the universal machine is.", 1)
-            type.spell("do you want to see it in action?", 1)
+            # type.spell("do you want to see it in action?", 1)
 
-        elif choice == "sure." or choice == "sure":
+        elif "cycle" in choice or "read" in choice:
             type.spell("it kinda goes like this...", 2)
             sleep(1)
-            demonstrate()
+            read_process_write()
             type.spell("should i continue?", 2)
             interrupt = input()
-            while interrupt != "no, thank you.":
-                demonstrate()
+            while "no" not in interrupt:
+                read_process_write()
                 type.spell("should i continue?", 2)
                 interrupt = input()
             type.spell("what else?", 2)
@@ -419,44 +430,44 @@ def main():
             compute(1)
             type.spell("should i continue?", 2)
             interrupt = input()
-            while interrupt != "no, thank you.":
+            while "no" not in interrupt:
                 compute(1)
                 type.spell("should i continue?", 2)
                 interrupt = input()
             type.spell("what else?", 2)
 
 
-        elif choice == "how do you understand it?":
-            type.spell('one way or another.', 2)
+        elif "binary" in choice:
+            type.spell('i understand it one way or the other.', 2)
             sleep(3)
             compute(2)
             type.spell("should i continue?", 2)
             interrupt = input()
-            while interrupt != "no, thank you.":
+            while "no" not in interrupt:
                 compute(2)
                 type.spell("should i continue?", 2)
                 interrupt = input()
             type.spell("what else?", 2)
 
-        elif choice == "can you translate it?":
-            type.spell('for you, it would be something like this:', 2)
+        elif "word" in choice:
+            type.spell('for humans, it would be something like this:', 2)
             sleep(3)
             compute(3)
             type.spell("should i continue?", 2)
             interrupt = input()
-            while interrupt != "no, thank you.":
+            while "no" not in interrupt:
                 compute(3)
                 type.spell("should i continue?", 2)
                 interrupt = input()
             type.spell("what else?", 2)
 
-        elif choice == "is this all you understand?":
+        elif "datatypes" in choice:
             type.spell("i understand data types based on numerical values.", 3)
             sleep(1)
             display_datatypes()
 
         elif "object" in choice:
-            type.spell("they all have the same skeleton.", 2)
+            type.spell("objects all share the same idea.", 2)
             sleep(1)
             dislay_object_skeleton()
             elaborate_object()
@@ -468,70 +479,70 @@ def main():
                 interrupt = input()
 
         elif "human" in choice:
-            type.spell("of course.", 2)
+            type.spell("this is how i've been told to deal with humans.", 2)
             sleep(1)
-            print(human)
-            sleep(1)
-            type.spell("i need more information", 2)
-            type.spell("what's your name?", 1)
-            human.name = input()
-            print("")
-            type.spell("how old are you?", 1)
-            human.age = input()
-            print("")
-            type.spell("what's your gender?", 1)
-            human.gender = input()
-            if type(human.name) != int:
-                set_style("reverse")
-                type.spell("ERR", 0)
-                reset_style()
-                type.spell(": human.gender attribute must be of type ", 0)
-                set_style("reverse")
-                type.spell("binary", 0)
-                reset_style()
-                type.spell(".", 2)
-                sleep(1)
-                type.spell("what's your gender? (0-1)", 1)
-                human.gender = input()
-            print("")
-            type.spell("are you employed? (yes/no)", 1)
-            human.employed = input()
-            human.employed = True
-            print("")
-            type.spell("what's your job?", 1)
-            human.job = input()
-            print("")
-            type.spell("what's your country of origin?", 1)
-            human.country_of_origin = input()
-            print("")
-            type.spell("what's your country of residence?", 1)
-            human.country_of_residence = input()
-            print("")
-            type.spell("how is your health?", 1)
-            human.health = input()
-            print("")
-            type.spell("how are you feeling?", 1)
-            human.feeling = input()
-            set_style("reverse")
-            type.spell("ERR", 0)
-            reset_style()
-            type.spell(": human.feeling attribute must be of type ", 0)
-            set_style("reverse")
-            type.spell("integer", 0)
-            reset_style()
-            type.spell(".", 1)
-            type.spell("how are you feeling? (0-10)", 1)
-            human.feeling = input()
-            print("")
-            sleep(1)
-            type.spell("thank you for your input.",1)
-            sleep(2)
-            type.spell("processing", 0)
-            interval = 0.1
-            type.spell("........................", 0)
-            type.spell("done", 2)
-            interval = 0.03
+            # type.spell("i need more information", 2)
+            # type.spell("what's your name?", 1)
+            # human.name = input()
+            # print("")
+            # type.spell("how old are you?", 1)
+            # human.age = input()
+            # print("")
+            # type.spell("what's your gender?", 1)
+            # human.gender = input()
+            # if type(human.name) != int:
+            #     set_style("reverse")
+            #     type.spell("ERR", 0)
+            #     reset_style()
+            #     type.spell(": human.gender attribute must be of type ", 0)
+            #     set_style("reverse")
+            #     type.spell("binary", 0)
+            #     reset_style()
+            #     type.spell(".", 2)
+            #     sleep(1)
+            #     type.spell("what's your gender? (0-1)", 1)
+            #     human.gender = input()
+            # print("")
+            # type.spell("are you employed? (yes/no)", 1)
+            # human.employed = input()
+            # human.employed = True
+            # print("")
+            # type.spell("what's your job?", 1)
+            # human.job = input()
+            # print("")
+            # type.spell("what's your country of origin?", 1)
+            # human.country_of_origin = input()
+            # print("")
+            # type.spell("what's your country of residence?", 1)
+            # human.country_of_residence = input()
+            # print("")
+            # type.spell("how is your health?", 1)
+            # human.health = input()
+            # print("")
+            # type.spell("how are you feeling?", 1)
+            # human.feeling = input()
+            # set_style("reverse")
+            # type.spell("ERR", 0)
+            # reset_style()
+            # type.spell(": human.feeling attribute must be of type ", 0)
+            # set_style("reverse")
+            # type.spell("integer", 0)
+            # reset_style()
+            # type.spell(".", 1)
+            # type.spell("how are you feeling? (0-10)", 1)
+            # human.feeling = input()
+            # print("")
+            # sleep(1)
+            # type.spell("thank you for your input.",1)
+            # sleep(2)
+            # type.spell("processing", 0)
+            # interval = 0.1
+            # type.spell("........................", 0)
+            # type.spell("done", 2)
+            # interval = 0.03
+            type.set_interval(0.1)
             extrapolate_human()
+            type.set_interval(0.03)
 
         elif "red" in choice:
             type.spell("i know that red is a triplet of values sent to the graphics output device, ranging from 0 to 255", 1)
@@ -539,7 +550,6 @@ def main():
             type.spell("red is [255, 0, 0]", 2)
 
         elif "blood" in choice:
-            type.spell("i did not know that.", 2)
             sleep(0.5)
             set_style("reverse")
             type.spell("we", 0)
@@ -549,6 +559,7 @@ def main():
             print("")
             sleep(0.25)
             enumerate_red()
+            sleep(2)
             blood_rain()
 
         elif "eliza" in choice:
@@ -583,7 +594,7 @@ def main():
 
 ######################################################### START
 setup_turing()
-title()
+# title()
 reset_style()
 
 

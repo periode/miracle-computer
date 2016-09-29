@@ -1,4 +1,4 @@
-#copyright Tim Vermeulen
+#copied from Tim Vermeulen
 
 from time import sleep
 
@@ -21,7 +21,7 @@ class Game(object):
                 for x, cell in enumerate(row):
                     neighbours = self.neighbours(x, y)
                     previous_state = self.state.board[y][x]
-                    should_live = neighbours == 3 or (neighbours == 2 and previous_state == True)
+                    should_live = neighbours == 2 or (neighbours == 1 and previous_state == True)
                     new_board[y][x] = should_live
 
             self.state.board = new_board
@@ -48,7 +48,7 @@ class State(object):
 
         for y, row in enumerate(positions.splitlines()):
             for x, cell in enumerate(row.strip()):
-                if cell == 'o':
+                if cell == '0':
                     active_cells.append((x,y))
 
         board = [[False] * width for row in range(height)]
@@ -67,19 +67,17 @@ class State(object):
         for y, row in enumerate(self.board):
             for x, cell in enumerate(row):
                 if self.board[y][x]:
-                    output += ' o'
+                    output += ' 1'
                 else:
-                    output += ' .'
+                    output += ' 0'
             output += '\n'
 
         return output
 
-glider = """ ooo.o.ooo
-             o.oo.o.o.
-             o..ooo..o
-             o...o..o. """
+glider = """001010100010001011111100101001
+            110101001010111100101010101001"""
 
-my_game = Game(State(glider, x = 9, y = 4, width = 30, height = 30))
+my_game = Game(State(glider, x = 9, y = 4, width = 60, height = 15))
 
 i = 0
 
