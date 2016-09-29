@@ -9,7 +9,6 @@ def set_interval(new_value):
 
 def spell(string, line_break):
     index = 0
-
     while index < len(string):
         stdout.write(string[index])
         stdout.flush()

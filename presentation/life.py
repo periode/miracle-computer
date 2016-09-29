@@ -74,10 +74,12 @@ class State(object):
 
         return output
 
-glider = """001010100010001011111100101001
-            110101001010111100101010101001"""
+glider = """000000000000000
+            000000000000000
+            000000000000001
+            000000000001010"""
 
-my_game = Game(State(glider, x = 9, y = 4, width = 60, height = 15))
+my_game = Game(State(glider, x = 0, y = 0, width = 40, height = 20))
 
 i = 0
 

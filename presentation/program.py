@@ -31,43 +31,6 @@ truth_legends = ['contradiction', 'logical NOR', 'converse non-implication', 'ne
 def setup_turing():
     for lines in paper:
         turing.append(lines.replace('\\n', '\n'))
-    # turing.append("")
-    # turing.append("")
-    #
-    # ##red 2
-    # turing.append("")
-    #
-    # turing.append("")
-    # turing.append("")
-    #
-    # ##red 5
-    # turing.append("")
-    #
-    # turing.append("")
-    # turing.append("")
-    #
-    # ##red
-    # turing.append("")
-    #
-    # turing.append("")
-    # ##red 10
-    # turing.append("")
-    #
-    # turing.append("")
-    #
-    # ##red 12
-    # turing.append("")
-    #
-    # turing.append("")
-    # turing.append("")
-    #
-    # ##red 15
-    # turing.append("")
-    #
-    # turing.append("")
-    #
-    # ##red 17
-    # turing.append("")
 
 
 def set_style(st):
@@ -93,18 +56,35 @@ def title():
         sleep(0.1)
         print('\n')
 
+def chapter(title):
+    sleep(0.5)
+    os.system('clear')
+    sleep(1)
+    type.spell('--------------------------------'+title, 0)
+    sleep(0.1)
+    print("")
+    sleep(0.1)
+    print("")
+    sleep(0.1)
+    print("")
+
+def end_chapter():
+    for x in range(0, t.height):
+        sleep(0.1)
+        print("")
+    os.system('clear')
 
 def display_turing():
-    type.spell("it started with a text.", 1)
-    print("")
     type.spell("it was written by ", 0)
     set_style('reverse')
-    type.spell("alan turing", 0)
+    type.spell("Alan Turing", 0)
     reset_style()
     print("")
-    sleep(3)
+    sleep(0.1)
     print("")
+    sleep(2)
 
+    type.set_interval(0.0175)
 
     turing_index = 0
     global turing
@@ -117,6 +97,7 @@ def display_turing():
         type.spell(turing[turing_index], 0)
         reset_style()
         turing_index += 1
+    type.set_interval(0.03)
     print("")
     print("")
 
@@ -135,7 +116,6 @@ def print_error():
         type.spell('i\'m sorry?', 1)
 
 def display_truth():
-    type.spell("the truth functions are as follow:", 3)
     index = 0
     for index in range(0, len(truth_symbols)):
         set_style("reverse")
@@ -196,21 +176,21 @@ def compute(complexity_level):
             if(complexity_level == 2):
                 type.spell(add+str(bin(b)[2:]), 1)
             else:
-                type.spell(add+str(b), 1)
+                type.spell(add+str(bin(b)[2:]), 1)
             sleep(0.5)
             a += b
         elif r < 0.5:
             if(complexity_level == 2):
                 type.spell(sub+str(bin(b)[2:]), 1)
             else:
-                type.spell(sub+str(b), 1)
+                type.spell(sub+str(bin(b)[2:]), 1)
             sleep(0.5)
             a -= b
         elif r < 0.75:
             if(complexity_level == 2):
                 type.spell(mult+str(bin(b)[2:]), 1)
             else:
-                type.spell(mult+str(b), 1)
+                type.spell(mult+str(bin(b)[2:]), 1)
             sleep(0.5)
             a *= b
         else:
@@ -357,7 +337,7 @@ def enumerate_red():
 
 def blood_rain():
     ind = 0
-    threshold = 0.0001
+    threshold = -0.0001
     while threshold < 1.3:
         if random.random() < threshold:
             print(t.on_red+"  ", end="")
@@ -366,25 +346,25 @@ def blood_rain():
         ind+=1
         stdout.flush()
         sleep(0.001)
-        threshold += 0.00001
+        threshold += 0.0001
 
 
 def run_life():
     step = 0
-    while step < 101:
-        # os.system('clear')
+    while step < 29:
         print("\n", end="")
         print(t.normal+"   life and death at step # %i" % step)
         for char in life.my_game.display():
             if char == '1':
                 print(t.normal+char.format(t=t), end="")
             else:
-                print(t.red+char.format(t=t), end="")
-        # print(life.my_game.display())
-        sleep(0.5)
+                print(t.dim_red+char.format(t=t), end="")
+        sleep(0.25)
 
         life.my_game.step(step)
         step += 1
+    sleep(2)
+    reset_style()
 
 
 def show_source():
@@ -398,109 +378,71 @@ def main():
         choice = input(prompt)
 
         if "turing" in choice:
+            chapter('LIFE')
             display_turing()
-            type.spell("...and he goes on to solve the decision problem.", 1)
+            end_chapter()
 
         elif "truth" in choice:
+            chapter('TRUTH')
             display_truth()
+            end_chapter()
 
         elif "cycle" in choice or "read" in choice:
-            type.spell("it kinda goes like this...", 2)
-            sleep(1)
+            chapter('CYCLE')
             read_process_write()
-            type.spell("should i continue?", 2)
-            interrupt = input()
-            while "no" not in interrupt:
-                read_process_write()
-                type.spell("should i continue?", 2)
-                interrupt = input()
-            type.spell("what else?", 2)
+            end_chapter()
 
         elif "binary" in choice:
-            type.spell('i understand it one way or the other.', 2)
-            sleep(3)
+            chapter('BINARY')
             compute(2)
-            type.spell("should i continue?", 2)
-            interrupt = input()
-            while "no" not in interrupt:
-                compute(2)
-                type.spell("should i continue?", 2)
-                interrupt = input()
-            type.spell("what else?", 2)
+            end_chapter()
 
         elif "word" in choice:
-            type.spell('for humans, it would be something like this:', 2)
-            sleep(3)
+            chapter('WORDS')
             compute(3)
-            type.spell("should i continue?", 2)
-            interrupt = input()
-            while "no" not in interrupt:
-                compute(3)
-                type.spell("should i continue?", 2)
-                interrupt = input()
-            type.spell("what else?", 2)
+            end_chapter()
 
         elif "datatypes" in choice:
-            type.spell("i understand data types based on numerical values.", 3)
-            sleep(1)
+            chapter('DATATYPES')
             display_datatypes()
+            end_chapter()
 
         elif "object" in choice:
-            type.spell("objects all share the same idea.", 2)
-            sleep(1)
+            chapter('OBJECTS')
             dislay_object_skeleton()
             elaborate_object()
-            type.spell("should i continue?", 2)
-            interrupt = input()
-            while "no" not in interrupt:
-                elaborate_object()
-                type.spell("should i continue?", 2)
-                interrupt = input()
+            end_chapter()
 
         elif "human" in choice:
-            type.spell("this is how i've been told to deal with humans.", 2)
-            sleep(1)
-            type.set_interval(0.1)
+            chapter('HUMAN')
+            type.set_interval(0.01)
             extrapolate_human()
             type.set_interval(0.03)
+            end_chapter()
 
-        elif "blood" in choice:
-            sleep(0.5)
-            set_style("reverse")
-            type.spell("we", 0)
-            reset_style()
-            type.spell(" can create an object to represent red.", 2)
-            sleep(0.25)
-            print("")
-            sleep(0.25)
+        elif "red" in choice:
+            chapter('RED')
             enumerate_red()
             sleep(2)
             blood_rain()
+            end_chapter()
 
         elif "eliza" in choice:
-            type.spell('this is ELIZA', 0)
-            sleep(0.1)
-            print('\n')
-            sleep(0.1)
-            print('\n')
-            sleep(0.1)
-            print('\n')
+            chapter('ELIZA')
             set_style('reverse')
             eliza.converse()
             reset_style()
-            sleep(0.1)
-            print('\n')
-            sleep(0.1)
-            print('\n')
-            sleep(0.1)
-            print('\n')
-            type.spell('that was ELIZA',0)
+            end_chapter()
 
         elif "life" in choice:
+            chapter('LIFE')
             run_life()
+            end_chapter()
 
         elif "source" in choice:
+            chapter('SOURCE')
             show_source()
+            end_chapter()
 
         elif "enough" in choice:
             reset_style()
