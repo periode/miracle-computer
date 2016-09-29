@@ -70,7 +70,7 @@ def chapter(title):
 
 def end_chapter():
     for x in range(0, t.height):
-        sleep(0.1)
+        sleep(0.5)
         print("")
     os.system('clear')
 
@@ -122,13 +122,13 @@ def display_truth():
         type.spell(" "+truth_symbols[index], 1)
         reset_style()
         type.spell(truth_legends[index], 3)
-        sleep(1)
+        sleep(0.5)
         index += 1
     print("")
 
 def read_process_write():
     t = 0
-    while t < 10:
+    while t < 30:
         type.spell("READ", 1)
         type.spell("PROCESS", 1)
         type.spell("WRITE", 1)
@@ -197,7 +197,7 @@ def compute(complexity_level):
             if(complexity_level == 2):
                 type.spell(div+str(bin(b)[2:]), 1)
             else:
-                type.spell(div+str(b), 1)
+                type.spell(div+str(bin(b)[2:]), 1)
             sleep(0.5)
             a /= b
         t += 1
@@ -351,7 +351,7 @@ def blood_rain():
 
 def run_life():
     step = 0
-    while step < 29:
+    while step < 101:
         print("\n", end="")
         print(t.normal+"   life and death at step # %i" % step)
         for char in life.my_game.display():
@@ -453,7 +453,7 @@ def main():
 
 
 setup_turing()
-# title()
+title()
 reset_style()
 
 try:
