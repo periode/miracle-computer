@@ -77,6 +77,7 @@ def chapter(title):
     print("")
 
 def end_chapter():
+    sleep(2)
     for x in range(0, t.height):
         sleep(0.1)
         print("")
@@ -129,8 +130,9 @@ def display_truth():
         set_style("reverse")
         type.spell(" "+truth_symbols[index], 1)
         reset_style()
-        type.spell(truth_legends[index], 3)
-        sleep(0.25)
+        type.spell(truth_legends[index], 0)
+        sleep(0.5)
+        print("\n\n")
         index += 1
     print("")
 
@@ -176,7 +178,7 @@ def compute(complexity_level):
     b = 0
     t = 0
     while t < 20:
-        type.spell(read+str(decimal.Decimal(a)), 1)
+        type.spell(read+str(bin(int(a))[2:]), 1)
         sleep(0.5)
         b = random.randint(0, 256)
         r = random.random()
@@ -211,9 +213,17 @@ def compute(complexity_level):
         t += 1
 
         if complexity_level == 2:
-            type.spell(write+str(bin(int(a))[2:]), 1)
+            if a < 0:
+                a *= -1
+                dec_a = float(a)
+                hex_a = int(a)
+                type.spell(write+'-'+str(bin(hex_a)[2:]), 1)
+            else:
+                dec_a = float(a)
+                hex_a = int(a)
+                type.spell(write+str(bin(hex_a)[2:]), 1)
         else:
-            type.spell(write+str(decimal.Decimal(a)), 1)
+            type.spell(write+str(a)[2:], 1)
 
 def display_datatypes():
     type.spell("a ", 0)
@@ -407,7 +417,9 @@ def main():
 
         elif "binary" in choice:
             chapter('BINARY')
+            type.set_interval(0.02)
             compute(2)
+            type.set_interval(0.03)
             end_chapter()
 
         elif "word" in choice:
@@ -467,7 +479,7 @@ def main():
 
 setup_turing()
 setup_truth()
-title()
+# title()
 reset_style()
 
 try:
