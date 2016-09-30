@@ -1,0 +1,16 @@
+F
+NOR
+Xq
+¬p
+↛
+¬q
+XOR
+NAND
+AND
+XNOR
+q
+if/then
+p
+then/if
+OR
+T

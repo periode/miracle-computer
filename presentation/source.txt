@@ -13,11 +13,13 @@ import type
 import human as h
 import color as c
 
-
 t = Terminal()
 
+source = open('source.txt', 'r')
+paper = open('turing.txt', 'r')
+
 choice = ""
-prompt = ""
+prompt = "waiting for your input > "
 
 human = h.Human()
 red = c.Color()
@@ -27,43 +29,8 @@ truth_symbols = ['F', 'NOR', 'Xq', '¬p', '↛', '¬q', 'XOR', 'NAND', 'AND', 'X
 truth_legends = ['contradiction', 'logical NOR', 'converse non-implication', 'negation', 'material non-implication', 'negation', 'exclusive disjunction', 'logical NAND', 'logical conjunction', 'logical biconditional', 'projection function', 'material implication (rule of inference)', 'projection function', 'converse implication', 'logical disjunction', 'tautology']
 
 def setup_turing():
-    turing.append("ON COMPUTABLE NUMBERS, WITH AN APPLICATION TO THE ENTSCHEIDUNGSPROBLEM\n\n\n")
-    turing.append("The \"computable\" numbers may be described briefly as the real numbers whose expressions as a decimal are calculable by finite means. Although the subject of this paper is ostensibly the computable numbers. it is almost equally easy to define and investigate computable functions of an integral variable or a real or computable variable, computable predicates, and so forth. The fundamental problems involved are, however, the same in each case, and I have chosen the computable numbers for explicit treatment as involving the least cumbrous technique. I hope shortly to give an account of the relations of the computable numbers, functions, and so forth to one another. This will include a development of the theory of functions of a real variable expressed in terms of computable numbers.")
-
-    ##red 2
-    turing.append("According to my definition, a number is computable if its decimal can be written down by a machine.")
-
-    turing.append("\n\nIn §§ 9, 10 I give some arguments with the intention of showing that the computable numbers include all numbers which could naturally be regarded as computable. In particular, I show that certain large classes of numbers are computable. They include, for instance, the real parts of all algebraic numbers, the real parts of the zeros of the Bessel functions, the numbers PI, e, etc. The computable numbers do not, however, include all definable numbers, and an example is given of a definable number which is not computable.")
-    turing.append("Although the class of computable numbers is so great, and in many ways similar to the class of real numbers, ")
-
-    ##red 5
-    turing.append("it is nevertheless enumerable")
-
-    turing.append(". In § 81 examine certain arguments which would seem to prove the contrary. By the correct application of one of these arguments, conclusions are reached which are superficially similar to those of Gödel. These results have valuable applications. In particular, it is shown (§11) that the Hilbertian Entscheidungsproblem can have no solution. In a recent paper Alonzo Church has introduced an idea of \"effective calculability\", which is equivalent to my \"computability\", but is very differently defined. Church also reaches similar conclusions about the Entscheidungsproblem. The proof of equivalence between \"computability\" and \"effective calculability\" is outlined in an appendix to the present paper.")
-    turing.append("\n\n    1. Computing machines.\n\nWe have said that the computable numbers are those whose decimals are calculable by finite means. This requires rather more explicit definition. No real attempt will be made to justify the definitions given until we reach § 9. ")
-
-    ##red
-    turing.append("For the present I shall only say that the justification lies in the fact that the human memory is necessarily limited.")
-
-    turing.append("\n\nWe may compare a man in the process of computing a real number to a machine which is only capable of a finite number of conditions q1; q2; ... qI; which will be called \"m-configuration\". The machine is supplied with a \"tape\" (the analogue of paper) running through it, and divided into sections (called \"squares\") each capable of bearing a \"symbol\". At any moment there is just one square, say the r-th, bearing the symbol <2>(r) which is \"in the machine\". We may call this square the \"scanned square\". The symbol on the scanned square may be called the \"scanned symbol\". The \"scanned symbol\" is ")
-    ##red 10
-    turing.append("the only one of which the machine is, so to speak, \"directly aware\"")
-
-    turing.append(". However, by altering its m-configuration the machine can effectively remember some of the symbols which it has \"seen\" (scanned) previously. The possible behaviour of the machine at any moment is determined by the ra-configuration qn and the scanned symbol <S (r). This pair qn, (r) will be called the \"configuration\": thus the configuration determines the possible behaviour of the machine. In some of the configurations in which the scanned square is blank (i.e. bears no symbol) the machine writes down a new symbol on the scanned square: in other configurations it erases the scanned symbol. The machine may also change the square which is being scanned, but only by shifting it one place to right or left. In addition to any of these operations the m-configuration may be changed. Some of the symbols written down will form the sequence of figures which is the decimal of the real number which is being computed. ")
-
-    ##red 12
-    turing.append("The others are just rough notes to \"assist the memory \".")
-
-    turing.append(" It will only be these rough notes which will be liable to erasure.\n")
-    turing.append("It is my contention that these operations include all those which are used in the computation of a number. ")
-
-    ##red 15
-    turing.append("The defence of this contention will be easier when the theory of the machines is familiar to the reader. ")
-
-    turing.append("In the next section, ")
-
-    ##red 17
-    turing.append("I therefore proceed with the development of the theory and assume that it is understood what is meant by \"machine\", \"tape\", \"scanned\", etc.")
+    for lines in paper:
+        turing.append(lines.replace('\\n', '\n'))
 
 
 def set_style(st):
@@ -89,18 +56,35 @@ def title():
         sleep(0.1)
         print('\n')
 
+def chapter(title):
+    sleep(0.5)
+    os.system('clear')
+    sleep(1)
+    type.spell('--------------------------------'+title, 0)
+    sleep(0.1)
+    print("")
+    sleep(0.1)
+    print("")
+    sleep(0.1)
+    print("")
+
+def end_chapter():
+    for x in range(0, t.height):
+        sleep(0.5)
+        print("")
+    os.system('clear')
 
 def display_turing():
-    type.spell("it started with a text.", 1)
-    print("")
     type.spell("it was written by ", 0)
     set_style('reverse')
-    type.spell("alan turing", 0)
+    type.spell("Alan Turing", 0)
     reset_style()
     print("")
-    sleep(3)
+    sleep(0.1)
     print("")
+    sleep(2)
 
+    type.set_interval(0.0175)
 
     turing_index = 0
     global turing
@@ -113,6 +97,7 @@ def display_turing():
         type.spell(turing[turing_index], 0)
         reset_style()
         turing_index += 1
+    type.set_interval(0.03)
     print("")
     print("")
 
@@ -131,20 +116,19 @@ def print_error():
         type.spell('i\'m sorry?', 1)
 
 def display_truth():
-    type.spell("the truth functions are as follow:", 3)
     index = 0
     for index in range(0, len(truth_symbols)):
         set_style("reverse")
         type.spell(" "+truth_symbols[index], 1)
         reset_style()
         type.spell(truth_legends[index], 3)
-        sleep(1)
+        sleep(0.25)
         index += 1
     print("")
 
 def read_process_write():
     t = 0
-    while t < 10:
+    while t < 30:
         type.spell("READ", 1)
         type.spell("PROCESS", 1)
         type.spell("WRITE", 1)
@@ -217,7 +201,11 @@ def compute(complexity_level):
             sleep(0.5)
             a /= b
         t += 1
-        type.spell(write+str(decimal.Decimal(a)), 1)
+
+        if complexity_level == 2:
+            type.spell(write+str(bin(decimal.Decimal(a))[2:]))
+        else:
+            type.spell(write+str(decimal.Decimal(a)), 1)
 
 def display_datatypes():
     type.spell("a ", 0)
@@ -353,7 +341,7 @@ def enumerate_red():
 
 def blood_rain():
     ind = 0
-    threshold = 0.0001
+    threshold = -0.0001
     while threshold < 1.3:
         if random.random() < threshold:
             print(t.on_red+"  ", end="")
@@ -362,135 +350,103 @@ def blood_rain():
         ind+=1
         stdout.flush()
         sleep(0.001)
-        threshold += 0.00001
+        threshold += 0.0001
 
 
 def run_life():
     step = 0
     while step < 101:
-        # os.system('clear')
         print("\n", end="")
         print(t.normal+"   life and death at step # %i" % step)
         for char in life.my_game.display():
             if char == '1':
                 print(t.normal+char.format(t=t), end="")
             else:
-                print(t.red+char.format(t=t), end="")
-        # print(life.my_game.display())
-        sleep(0.5)
+                print(t.dim_red+char.format(t=t), end="")
+        sleep(0.25)
 
         life.my_game.step(step)
         step += 1
+    sleep(2)
+    reset_style()
+
+
+def show_source():
+    for line in source:
+        type.spell(line, 0)
+        sleep(0.001)
 
 def main():
     choice = ""
     while choice != 'q':
         choice = input(prompt)
 
-        elif "truth" in choice:
-            display_truth()
-
-        elif "blood2" in choice:
-            blood_rain()
-
-        elif "turing" in choice:
+        if "turing" in choice:
+            chapter('TURING')
             display_turing()
-            type.spell("...and he goes on to solve the decision problem.", 1)
+            end_chapter()
+
+        elif "truth" in choice:
+            chapter('TRUTH')
+            display_truth()
+            end_chapter()
 
         elif "cycle" in choice or "read" in choice:
-            type.spell("it kinda goes like this...", 2)
-            sleep(1)
+            chapter('CYCLE')
             read_process_write()
-            type.spell("should i continue?", 2)
-            interrupt = input()
-            while "no" not in interrupt:
-                read_process_write()
-                type.spell("should i continue?", 2)
-                interrupt = input()
-            type.spell("what else?", 2)
+            end_chapter()
 
         elif "binary" in choice:
-            type.spell('i understand it one way or the other.', 2)
-            sleep(3)
+            chapter('BINARY')
             compute(2)
-            type.spell("should i continue?", 2)
-            interrupt = input()
-            while "no" not in interrupt:
-                compute(2)
-                type.spell("should i continue?", 2)
-                interrupt = input()
-            type.spell("what else?", 2)
+            end_chapter()
 
         elif "word" in choice:
-            type.spell('for humans, it would be something like this:', 2)
-            sleep(3)
+            chapter('WORDS')
             compute(3)
-            type.spell("should i continue?", 2)
-            interrupt = input()
-            while "no" not in interrupt:
-                compute(3)
-                type.spell("should i continue?", 2)
-                interrupt = input()
-            type.spell("what else?", 2)
+            end_chapter()
 
         elif "datatypes" in choice:
-            type.spell("i understand data types based on numerical values.", 3)
-            sleep(1)
+            chapter('DATATYPES')
             display_datatypes()
+            end_chapter()
 
         elif "object" in choice:
-            type.spell("objects all share the same idea.", 2)
-            sleep(1)
+            chapter('OBJECTS')
             dislay_object_skeleton()
             elaborate_object()
-            type.spell("should i continue?", 2)
-            interrupt = input()
-            while "no" not in interrupt:
-                elaborate_object()
-                type.spell("should i continue?", 2)
-                interrupt = input()
+            end_chapter()
 
         elif "human" in choice:
-            type.spell("this is how i've been told to deal with humans.", 2)
-            sleep(1)
-            type.set_interval(0.1)
+            chapter('HUMAN')
+            type.set_interval(0.01)
             extrapolate_human()
             type.set_interval(0.03)
+            end_chapter()
 
-        elif "blood" in choice:
-            sleep(0.5)
-            set_style("reverse")
-            type.spell("we", 0)
-            reset_style()
-            type.spell(" can create an object to represent red.", 2)
-            sleep(0.25)
-            print("")
-            sleep(0.25)
+        elif "red" in choice:
+            chapter('RED')
             enumerate_red()
             sleep(2)
             blood_rain()
+            end_chapter()
 
         elif "eliza" in choice:
-            type.spell('this is ELIZA', 0)
-            sleep(0.1)
-            print('\n')
-            sleep(0.1)
-            print('\n')
-            sleep(0.1)
-            print('\n')
+            chapter('ELIZA')
             set_style('reverse')
             eliza.converse()
             reset_style()
-            sleep(0.1)
-            print('\n')
-            sleep(0.1)
-            print('\n')
-            sleep(0.1)
-            print('\n')
-            type.spell('that was ELIZA',0)
+            end_chapter()
 
         elif "life" in choice:
+            chapter('LIFE')
             run_life()
+            end_chapter()
+
+        elif "source" in choice:
+            chapter('SOURCE')
+            show_source()
+            end_chapter()
 
         elif "enough" in choice:
             reset_style()

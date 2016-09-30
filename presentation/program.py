@@ -15,22 +15,30 @@ import color as c
 
 t = Terminal()
 
-source = open('source.txt', 'r')
+source = open('program.py', 'r')
 paper = open('turing.txt', 'r')
+symbols = open('symbols.txt', 'r')
+legends = open('legends.txt', 'r')
 
 choice = ""
-prompt = ""
+prompt = "waiting for your input > "
 
 human = h.Human()
 red = c.Color()
 
 turing = []
-truth_symbols = ['F', 'NOR', 'Xq', '¬p', '↛', '¬q', 'XOR', 'NAND', 'AND', 'XNOR', 'q', 'if/then', 'p', 'then/if', 'OR', 'T']
-truth_legends = ['contradiction', 'logical NOR', 'converse non-implication', 'negation', 'material non-implication', 'negation', 'exclusive disjunction', 'logical NAND', 'logical conjunction', 'logical biconditional', 'projection function', 'material implication (rule of inference)', 'projection function', 'converse implication', 'logical disjunction', 'tautology']
+truth_symbols = []
+truth_legends = []
 
 def setup_turing():
-    for lines in paper:
-        turing.append(lines.replace('\\n', '\n'))
+    for line in paper:
+        turing.append(line.replace('\\n', '\n'))
+
+def setup_truth():
+    for symbol in symbols:
+        truth_symbols.append(symbol)
+    for legend in legends:
+        truth_legends.append(legend)
 
 
 def set_style(st):
@@ -45,13 +53,13 @@ def reset_style():
 
 def title():
     print('\n')
-    type.spell("################",1)
+    type.spell("########################",1)
     sleep(0.1)
-    type.set_interval(0.2)
-    type.spell('machine language', 1)
+    type.set_interval(0.1)
+    type.spell('    machine language', 1)
     type.set_interval(0.03)
     sleep(0.1)
-    type.spell("################", 1)
+    type.spell("########################", 1)
     for x in range(0, 10):
         sleep(0.1)
         print('\n')
@@ -70,12 +78,12 @@ def chapter(title):
 
 def end_chapter():
     for x in range(0, t.height):
-        sleep(0.5)
+        sleep(0.1)
         print("")
     os.system('clear')
 
 def display_turing():
-    type.spell("it was written by ", 0)
+    type.spell("Received 29 May 1936 - Read 12 November 1936, by ", 0)
     set_style('reverse')
     type.spell("Alan Turing", 0)
     reset_style()
@@ -84,7 +92,7 @@ def display_turing():
     print("")
     sleep(2)
 
-    type.set_interval(0.0175)
+    type.set_interval(0.015)
 
     turing_index = 0
     global turing
@@ -97,7 +105,7 @@ def display_turing():
         type.spell(turing[turing_index], 0)
         reset_style()
         turing_index += 1
-    type.set_interval(0.03)
+    type.set_interval(0.3)
     print("")
     print("")
 
@@ -122,13 +130,13 @@ def display_truth():
         type.spell(" "+truth_symbols[index], 1)
         reset_style()
         type.spell(truth_legends[index], 3)
-        sleep(0.5)
+        sleep(0.25)
         index += 1
     print("")
 
 def read_process_write():
     t = 0
-    while t < 30:
+    while t < 60:
         type.spell("READ", 1)
         type.spell("PROCESS", 1)
         type.spell("WRITE", 1)
@@ -167,7 +175,7 @@ def compute(complexity_level):
     a = 0
     b = 0
     t = 0
-    while t < 10:
+    while t < 20:
         type.spell(read+str(decimal.Decimal(a)), 1)
         sleep(0.5)
         b = random.randint(0, 256)
@@ -176,32 +184,36 @@ def compute(complexity_level):
             if(complexity_level == 2):
                 type.spell(add+str(bin(b)[2:]), 1)
             else:
-                type.spell(add+str(bin(b)[2:]), 1)
+                type.spell(add+str(b), 1)
             sleep(0.5)
             a += b
         elif r < 0.5:
             if(complexity_level == 2):
                 type.spell(sub+str(bin(b)[2:]), 1)
             else:
-                type.spell(sub+str(bin(b)[2:]), 1)
+                type.spell(sub+str(b), 1)
             sleep(0.5)
             a -= b
         elif r < 0.75:
             if(complexity_level == 2):
                 type.spell(mult+str(bin(b)[2:]), 1)
             else:
-                type.spell(mult+str(bin(b)[2:]), 1)
+                type.spell(mult+str(b), 1)
             sleep(0.5)
             a *= b
         else:
             if(complexity_level == 2):
                 type.spell(div+str(bin(b)[2:]), 1)
             else:
-                type.spell(div+str(bin(b)[2:]), 1)
+                type.spell(div+str(b), 1)
             sleep(0.5)
             a /= b
         t += 1
-        type.spell(write+str(decimal.Decimal(a)), 1)
+
+        if complexity_level == 2:
+            type.spell(write+str(bin(int(a))[2:]), 1)
+        else:
+            type.spell(write+str(decimal.Decimal(a)), 1)
 
 def display_datatypes():
     type.spell("a ", 0)
@@ -375,10 +387,11 @@ def show_source():
 def main():
     choice = ""
     while choice != 'q':
-        choice = input(prompt)
+        type.spell('waiting for input> ', 0)
+        choice = input()
 
         if "turing" in choice:
-            chapter('LIFE')
+            chapter('TURING')
             display_turing()
             end_chapter()
 
@@ -402,7 +415,7 @@ def main():
             compute(3)
             end_chapter()
 
-        elif "datatypes" in choice:
+        elif "data" in choice or "type" in choice:
             chapter('DATATYPES')
             display_datatypes()
             end_chapter()
@@ -453,6 +466,7 @@ def main():
 
 
 setup_turing()
+setup_truth()
 title()
 reset_style()
 
@@ -460,4 +474,5 @@ try:
     main()
 except KeyboardInterrupt:
     reset_style()
-    print('...enough.', end="\n\n")
+    print("\n\n\n")
+    print('...enough.', end="\n\n\n\n\n\n\n\n\n\n")

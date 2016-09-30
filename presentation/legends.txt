@@ -1,0 +1,16 @@
+contradiction
+logical NOR
+converse non-implication
+negation
+material non-implication
+negation
+exclusive disjunction
+logical NAND
+logical conjunction
+logical biconditional
+projection function
+material implication (rule of inference)
+projection function
+converse implication
+logical disjunction
+tautology

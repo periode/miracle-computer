@@ -11,8 +11,8 @@ class Human(object):
         self.health = '+/-'
         self.country_of_origin = ("string.capwords()")
         self.country_of_residence = ("string.capwords()")
-        self.feeling = 'user.monitor(twitter_account)'
-        self.twitter_account = "required"
+        self.feeling = 'user.monitor(email)'
+        self.email = "required"
 
         self.life_expectancy = "health * (country_of_origin+country_of_residence)"
         self.average_happiness = "feeling + employed*job[2]"
