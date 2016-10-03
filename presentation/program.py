@@ -78,10 +78,10 @@ def chapter(title):
 
 def end_chapter():
     sleep(2)
-    for x in range(0, t.height):
+    for x in range(0, 5):
         sleep(0.1)
         print("")
-    os.system('clear')
+    # os.system('clear')
 
 def display_turing():
     type.spell("Received 29 May 1936 - Read 12 November 1936, by ", 0)
@@ -93,7 +93,7 @@ def display_turing():
     print("")
     sleep(2)
 
-    type.set_interval(0.015)
+    type.set_interval(0.01)
 
     turing_index = 0
     global turing
@@ -126,15 +126,17 @@ def print_error():
 
 def display_truth():
     index = 0
+    # type.set_interval(0.04)
     for index in range(0, len(truth_symbols)):
         set_style("reverse")
         type.spell(" "+truth_symbols[index], 1)
         reset_style()
         type.spell(truth_legends[index], 0)
-        sleep(0.5)
+        sleep(1)
         print("\n\n")
         index += 1
     print("")
+    # type.set_interval(0.04)
 
 def read_process_write():
     t = 0
@@ -177,8 +179,12 @@ def compute(complexity_level):
     a = 0
     b = 0
     t = 0
-    while t < 20:
-        type.spell(read+str(bin(int(a))[2:]), 1)
+    while t < 15:
+        if(complexity_level == 2):
+            type.spell(read+str(bin(int(a))[2:]), 1)
+        else:
+            type.spell(read+str(a), 1)
+
         sleep(0.5)
         b = random.randint(0, 256)
         r = random.random()
@@ -381,7 +387,7 @@ def run_life():
                 print(t.normal+char.format(t=t), end="")
             else:
                 print(t.dim_red+char.format(t=t), end="")
-        sleep(0.25)
+        sleep(0.5)
 
         life.my_game.step(step)
         step += 1
@@ -445,10 +451,13 @@ def main():
             type.set_interval(0.03)
             end_chapter()
 
-        elif "red" in choice:
+        elif "color" in choice:
             chapter('RED')
             enumerate_red()
-            sleep(2)
+            end_chapter()
+
+        elif "red" in choice:
+            chapter('RED')
             blood_rain()
             end_chapter()
 
@@ -487,4 +496,4 @@ try:
 except KeyboardInterrupt:
     reset_style()
     print("\n\n\n")
-    print('...enough.', end="\n\n\n\n\n\n\n\n\n\n")
+    print('...enough.\t\t\t -https://pierredepaz.net', end="\n\n\n\n\n\n\n\n\n\n")

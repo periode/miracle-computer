@@ -257,7 +257,7 @@ def converse():
     eliza_2 = "i'm feeling very despondent."
 
     lines = 0
-    while lines < 21:
+    while lines < 16:
         # answer = input()
         print(t.normal+'\n', end="")
         print(t.black_on_white+'- ', end="")
