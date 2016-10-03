@@ -106,7 +106,7 @@ def display_turing():
         type.spell(turing[turing_index], 0)
         reset_style()
         turing_index += 1
-    type.set_interval(0.3)
+    type.set_interval(0.03)
     print("")
     print("")
 
@@ -479,7 +479,7 @@ def main():
 
 setup_turing()
 setup_truth()
-# title()
+title()
 reset_style()
 
 try:
