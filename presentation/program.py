@@ -6,6 +6,7 @@ from time import sleep
 from blessings import Terminal
 import decimal
 import string
+import socket
 
 import life
 import eliza
@@ -14,6 +15,11 @@ import human as h
 import color as c
 
 t = Terminal()
+
+ip = "127.0.0.1"
+port = 2046 #wkw
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 source = open('program.py', 'r')
 paper = open('turing.txt', 'r')
@@ -179,7 +185,7 @@ def compute(complexity_level):
     a = 0
     b = 0
     t = 0
-    while t < 15:
+    while t < 10:
         if(complexity_level == 2):
             type.spell(read+str(bin(int(a))[2:]), 1)
         else:
@@ -321,7 +327,7 @@ def generate_int():
 def elaborate_object():
     index = 0
 
-    while index < 20:
+    while index < 30:
         r = random.random()
 
         new_string = generate_string()
@@ -406,7 +412,11 @@ def main():
         type.spell('waiting for input> ', 0)
         choice = input()
 
-        if "turing" in choice:
+        if "add" in choice:
+            message = "add"
+            sock.sendto(message.encode('utf-8'), (ip, port))
+
+        elif "turing" in choice:
             chapter('TURING')
             display_turing()
             end_chapter()
@@ -488,7 +498,7 @@ def main():
 
 setup_turing()
 setup_truth()
-title()
+# title()
 reset_style()
 
 try:

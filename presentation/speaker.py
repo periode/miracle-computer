@@ -1,40 +1,23 @@
 import pyttsx
 import threading
 import ctypes
+import socket
 
-def speak_out():
-    # def onStart(name):
-    #     #do
-    # def onWord(name, location, length):
-    #
-    # def onEnd(name, completed):
-    #     engine.stop()
-    #     engine.endLoop()
+ip = "127.0.0.1"
+port = 2046
 
+w_add = "111001111101011100010"
 
-    engine = pyttsx.init()
-    # engine.connect('started-utterance', onStart)
-    # engine.connect('started-word', onWord)
-    # engine.connect('finished-utterance', onEnd)
-    engine.say('Thanks for this. The result was a bit of a surprise, but first I think I should very briefly explain what my code is doing: the program I\'m running is a mod for Quake that makes it accessible to vision-impaired and blind gamers')
-    engine.startLoop()
+def onEnd(name, completed):
+    print 'finishing', name, completed
+    voice.endLoop()
 
-def speak_out2():
-    # def onStart(name):
-    #     #do
-    # def onWord(name, location, length):
-    #
-    # def onEnd(name, completed):
-    #     engine.stop()
-    #     engine.endLoop()
+def speak_out(w):
+    voice = pyttsx.init()
+    voice.connect('finished-utterance', onEnd)
+    voice.say(w)
+    voice.runAndWait()
 
-
-    engine = pyttsx.init()
-    # engine.connect('started-utterance', onStart)
-    # engine.connect('started-word', onWord)
-    # engine.connect('finished-utterance', onEnd)
-    engine.say('Thanks for this. I hate you vanessa.')
-    engine.startLoop()
 
 
 speak_thread = None
@@ -64,17 +47,22 @@ def clear_thread():
         print ("first clearing thread...")
 
 
-speak_thread = threading.Thread(target=speak_out, args=())
-speak_thread.start()
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sock.bind((ip, port))
 
 
 while True:
-    command = raw_input('what? ')
+    print "listening for orders..."
 
-    if command == 'kill':
+    data, address = sock.recvfrom(1024)
+    order = data.decode('utf-8')
+    print "...received message: %s" % order
+
+    if order == 'kill':
         clear_thread()
-    elif command == 'again':
-        speak_thread = threading.Thread(target=speak_out2, args=())
-        speak_thread.start()
+    elif order == 'add':
+        speak_out(w_add)
     else:
-        print('?')
+        print '?'
+
+    print '... done speaking, for now.'
