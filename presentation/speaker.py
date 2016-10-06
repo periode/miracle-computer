@@ -2,11 +2,16 @@ import pyttsx
 import threading
 import ctypes
 import socket
+from time import sleep
 
 ip = "127.0.0.1"
 port = 2046
 
 w_add = "111001111101011100010"
+w_read = ""
+
+for i in range(0, 14):
+    w_read += "read, process, write, "
 
 def onEnd(name, completed):
     print 'finishing', name, completed
@@ -14,6 +19,18 @@ def onEnd(name, completed):
 
 def speak_out(w):
     voice = pyttsx.init()
+
+    # for v in voice.getProperty('voices'):
+    #     print 'voice %s' % v
+    voice.setProperty('voice', 'com.apple.speech.synthesis.voice.samantha')
+    voice.setProperty('volume', 0.6)
+
+    rate = voice.getProperty('rate')
+    if w is w_add:
+        voice.setProperty('rate', rate-50)
+    elif w is w_read:
+        voice.setProperty('rate', rate+55)
+
     voice.connect('finished-utterance', onEnd)
     voice.say(w)
     voice.runAndWait()
@@ -60,8 +77,13 @@ while True:
 
     if order == 'kill':
         clear_thread()
+    elif 'read' in order or 'cycle' in order:
+        sleep(3)
+        speak_out(w_read)
     elif order == 'add':
         speak_out(w_add)
+    elif order == 'thanks':
+        speak_out('thank you')
     else:
         print '?'
 

@@ -36,6 +36,10 @@ turing = []
 truth_symbols = []
 truth_legends = []
 
+def say(w):
+    message = w
+    sock.sendto(message.encode('utf-8'), (ip, port))
+
 def setup_turing():
     for line in paper:
         turing.append(line.replace('\\n', '\n'))
@@ -73,8 +77,8 @@ def title():
 def chapter(title):
     sleep(0.5)
     os.system('clear')
-    sleep(1)
-    type.spell('--------------------------------'+title, 0)
+    sleep(0.25)
+    type.spell('------------------------'+title, 0)
     sleep(0.1)
     print("")
     sleep(0.1)
@@ -146,11 +150,13 @@ def display_truth():
 
 def read_process_write():
     t = 0
-    while t < 60:
+    while t < 15:
         type.spell("READ", 1)
         type.spell("PROCESS", 1)
         type.spell("WRITE", 1)
         t += 1
+    message = "end"
+    sock.sendto(message.encode('utf-8'), (ip, port))
 
 def compute(complexity_level):
     add = ""
@@ -185,7 +191,7 @@ def compute(complexity_level):
     a = 0
     b = 0
     t = 0
-    while t < 10:
+    while t < 4:
         if(complexity_level == 2):
             type.spell(read+str(bin(int(a))[2:]), 1)
         else:
@@ -380,7 +386,7 @@ def blood_rain():
         ind+=1
         stdout.flush()
         sleep(0.001)
-        threshold += 0.0001
+        threshold += 0.00005
 
 
 def run_life():
@@ -413,8 +419,7 @@ def main():
         choice = input()
 
         if "add" in choice:
-            message = "add"
-            sock.sendto(message.encode('utf-8'), (ip, port))
+            say('add')
 
         elif "turing" in choice:
             chapter('TURING')
@@ -427,8 +432,12 @@ def main():
             end_chapter()
 
         elif "cycle" in choice or "read" in choice:
+            say('read')
+
+            type.set_interval(0.08)
             chapter('CYCLE')
             read_process_write()
+            type.set_interval(0.03)
             end_chapter()
 
         elif "binary" in choice:
@@ -492,18 +501,23 @@ def main():
             reset_style()
             type.spell("until next time", 1)
             quit()
+
+        elif 'thank' in choice:
+            say('thanks')
         else:
             print_error()
 
 
+os.system('clear')
 setup_turing()
 setup_truth()
-# title()
+title()
 reset_style()
 
 try:
     main()
 except KeyboardInterrupt:
+    say('thanks')
     reset_style()
     print("\n\n\n")
-    print('...enough.\t\t\t -https://pierredepaz.net', end="\n\n\n\n\n\n\n\n\n\n")
+    print('...thank you.\t\t\t -https://pierredepaz.net', end="\n\n\n\n\n\n\n\n\n\n")
