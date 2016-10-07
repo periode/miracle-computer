@@ -84,6 +84,9 @@ while True:
         speak_out(w_add)
     elif order == 'thanks':
         speak_out('thank you')
+    elif 'step' in order:
+        w_step = str(order)
+        speak_out(str(order))
     else:
         print '?'
 

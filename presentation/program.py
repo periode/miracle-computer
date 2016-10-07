@@ -391,19 +391,20 @@ def blood_rain():
 
 def run_life():
     step = 0
-    while step < 101:
+    while step < 22:
         print("\n", end="")
-        print(t.normal+"   life and death at step # %i" % step)
+        say(str('step '+str(step)))
+        print(t.normal+"   life and death at step %i" % step)
         for char in life.my_game.display():
             if char == '1':
                 print(t.normal+char.format(t=t), end="")
             else:
                 print(t.dim_red+char.format(t=t), end="")
-        sleep(0.5)
+        sleep(2.8)
 
         life.my_game.step(step)
         step += 1
-    sleep(2)
+    sleep(1)
     reset_style()
 
 
@@ -520,4 +521,4 @@ except KeyboardInterrupt:
     say('thanks')
     reset_style()
     print("\n\n\n")
-    print('...thank you.\t\t\t -https://pierredepaz.net', end="\n\n\n\n\n\n\n\n\n\n")
+    print('...thank you.\t\t\t pierredepaz.net', end="\n\n\n\n\n\n\n\n\n\n")
