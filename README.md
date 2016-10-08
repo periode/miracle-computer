@@ -1,6 +1,12 @@
 # miracle-computer
 programs written for the miracle marathon at serpentine gallery in 2016, about the computer as miracle
 
-- a python script to interact with during the presentation
+- a script to interact with during the presentation (presentation/program.py)
 
-- a js script which will read itself on the radio
+- a script to speak out some words (presentation/speaker.py)
+
+- a script to represent the game of life (presentation/life.py)
+
+- a script to represent eliza (presentation/eliza.py)
+
+- a helper script for making things look good (presentation/type.py)
